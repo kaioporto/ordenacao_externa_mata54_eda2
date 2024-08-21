@@ -1,42 +1,36 @@
 from sys import argv
 from struct import *
 
-##pega o nome do arquivo de entrada dado na linha de comando
-filename = argv[1]
-
-##abrindo arquivo e extraindo parametros
-with open(filename) as f:
-    data = f.readlines()
-f.close()
 
 
-## Setando parâmetros a serem usados
-alg = data[0]               #char que indica o algoritmo
-params = list(data[1].split(" "))      #parametros da funçao -> m, k, r, n
-keys = list(data[2].split(" "))        #elementos a serem ordenados
+def read_input_data():
+    filename = argv[1] #argumento passado via CLI
+    with open(filename) as f: #abrindo o arquivo e extraindo parametros
+        data = f.readlines()
+    f.close()
 
-#parametros da funçao
-mem_size = params[0]
-k_files = params[1]
-runs = params[2]
-num_registros = params[3]
+    # organizando parâmetros a serem usados
+    alg = data[0]                          #char que indica o algoritmo
+    params = list(data[1].split(" "))      #parametros da funçao -> m, k, r, n
+    keys = list(data[2].split(" "))        #elementos a serem ordenados
 
+    return params
 
-
-## Criando as runs iniciais
-
+def p_way_merge(mem_size, k_files, runs, num_elements):
+    
 
 
 ########## DEBUG #############
-#print(type(alg))
-#print(alg)
-#print("elementos")
-#for elem in keys:
-#    print(elem)
-#print("parametros")
-#for i in params:
-#    print(i)
+def show_data_debug(elems = None, var = None):
+    print("Elementos do array")
+    if(elems):
+        for elem in elems:
+            print(elem)
 
-## 
+    print("Variavel")
+    print(var)
 
 
+params = read_input_data()
+
+p_way_merge(params)
