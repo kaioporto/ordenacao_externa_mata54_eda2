@@ -20,11 +20,6 @@ def read_input_data():
     for i in range(len(keys)):
         keys[i] = int(keys[i])
 
-    max_tam_runs = int(params[3])/int(params[1])
-    if(alg == "B"):
-        k_pages = params[1]/2
-    
-
     return params, keys
 
 def heapify(elems, n, i):
@@ -76,8 +71,31 @@ def p_way_merge(mem_size, k_pages, runs, num_elements):
         runs[k] = runs[j]
         j=j+1
 
-def p_way_merge_driver(elems):
-    pass
+def p_way_merge_driver(mem_size, k_pages, n_runs, keys):
+    max_tam_runs = len(keys)//mem_size #n/m
+    # if(alg == "B"):
+    #     k_pages = k_pages/2
+    
+    runs = []
+    i = 0
+    j = 0
+    max_list = max_tam_runs
+    while j < n_runs:                   ## pega somente a r sequencias iniciais. o restante é descartado
+        inner_list = keys[i:max_list]   ##pegando os elementos da runs de tamanho maximo n/m
+        runs.append(inner_list)
+        i = i + max_tam_runs
+        max_list = max_list + max_tam_runs
+        j = j + 1
+
+    print(runs)
+    for i in range(n_runs):
+        heapsort(runs[i])
+
+    for i in range(n_runs):
+        #p_way_merge()
+    
+    print(runs)
+    return runs
 
 ########## DEBUG #############
 def show_data_debug(elems = None, var = None):
@@ -93,10 +111,10 @@ def show_data_debug(elems = None, var = None):
 
 params, keys = read_input_data()
 
-print("Parametros")
-show_data_debug(params)
+#show_data_debug(params)
+#show_data_debug(keys)
+#heapsort(keys)
 show_data_debug(keys)
-heapsort(keys)
-show_data_debug(keys)
-
+runs = p_way_merge_driver(params[0], params[1], params[2], keys)
+#show_data_debug(runs)
 #p_way_merge(params)
